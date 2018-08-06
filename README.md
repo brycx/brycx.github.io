@@ -1,1 +1,0 @@
-# brycx.github.io
