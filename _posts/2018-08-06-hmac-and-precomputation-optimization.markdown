@@ -13,7 +13,7 @@ the `std` library, which means that I'm unable to run that code on embedded devi
 After a couple of times where I had been reviewing my own code, I started to notice some
 patterns in the HMAC implementation that seemed to be repetitive. So I set out
 to implement HMAC again, without the repetitive patterns and something that could be
-run on embedded devices. [This implementation](https://github.com/brycx/rigel) is based on HMAC-SHA512, but the
+run on embedded devices. [This implementation](https://github.com/brycx/rigel) is called `rigel` and is based on HMAC-SHA512, but the
 tweaks can be applied to HMAC with any SHA variant.
 
 I set the following goals for my project:
