@@ -7,13 +7,13 @@ date:   2018-08-06
 ### Background
 
 I've been working on one [project](https://github.com/brycx/orion) called `orion`, where I've
-implemented the HMAC algorithm. This project is written in Rust, and depends on
-the `std` library, which means that I am unable to run that code on embedded devices.
+implemented the HMAC algorithm. That project is written in Rust and depends on
+the `std` library, which means that I'm unable to run that code on embedded devices.
 
 After a couple of times where I had been reviewing my own code, I started to notice some
 patterns in the HMAC implementation that seemed to be repetitive. So I set out
 to implement HMAC again, without the repetitive patterns and something that could be
-run on embedded devices. [This implementation](https://github.com/brycx/rigel), is based on HMAC-SHA512, but the
+run on embedded devices. [This implementation](https://github.com/brycx/rigel) is based on HMAC-SHA512, but the
 tweaks can be applied to HMAC with any SHA variant.
 
 I set the following goals for my project:
@@ -58,7 +58,7 @@ fn pad_key_to_ipad(key: &[u8]) -> [u8; 192] {
     padded_key
 }
 ```
-You can start out with an array of `0x36 * 192`. This means that if the length of `K` is less than the blocksize, you can simply iterate through the key and XOR each value with the corresponding index value of the `padded_key` array. This yields the result of `K XOR ipad`. If the length of `K` is greater then the blocksize, simply hash `K` using `H`, copy the result into the first 64 bytes of the array and XOR this with the `ipad`.
+You can start out with an array of `0x36 * 192`. This means that if the length of `K` is less than the blocksize, you can simply iterate through the key and XOR each value with the corresponding index value of the `padded_key` array. This yields the result of `K XOR ipad`. If the length of `K` is greater than the blocksize, simply hash `K` using `H`, copy the result into the first 64 bytes of the array and XOR this with the `ipad`.
 
 The padding of zeroes and XORing this with the `ipad` has been precomputed, because naturally `0x00 XOR 0x36 = 0x36`.
 
@@ -78,7 +78,7 @@ The definition of associative property from [Wikipedia](https://en.wikipedia.org
 > Formally, a binary operation ∗ on a set S is called associative if it satisfies the associative law:
 > (x ∗ y) ∗ z = x ∗ (y ∗ z) for all x, y, z in S.
 
-Remember that the first 128 bytes of the `buffer` array are the result of `K XOR ipad` from the padding of `K`. Let's call these 128 bytes `ires`. To retrieve the key `K` from `ires`, we would simply `ires XOR ipad` and then to compute to the `opad` we would simply `K XOR opad`. These two operations are needless however, since it can be done in one operation: `ires XOR 0x6A`, where `0x6A = (ipad XOR opad)`. This is possible because of the associative property: `(K XOR ipad) XOR opad = K XOR (ipad XOR opad)`:
+Remember that the first 128 bytes of the `buffer` array are the result of `K XOR ipad`. Let's call these 128 bytes `ires`. To retrieve the key `K` from `ires`, we could inverse: `ires XOR ipad` and then compute the `opad` by `K XOR opad`. These two operations are needless however, since it can be done in one operation: `ires XOR 0x6A`, where `0x6A = (ipad XOR opad)`. This is possible because of the associative property: `(ires XOR ipad) XOR opad = ires XOR (ipad XOR opad)`:
 
 ```rust
     // Make first 128 bytes the opad
@@ -86,7 +86,7 @@ Remember that the first 128 bytes of the `buffer` array are the result of `K XOR
         *idx ^= 0x6A;
     }
 ```
-Now simply hash the `buffer` array and the MAC is computed.
+Now we can simply hash the content of the `buffer` array to compute the MAC.
 
 ### Performance
 The benchmarks are listed in the [project repository](https://github.com/brycx/rigel):
@@ -98,10 +98,10 @@ test ring       ... bench: 3,379 ns/iter (+/- 228)
 ```
 > This was benchmarked on a MacBook Air 1,6 GHz Intel Core i5, 4GB.
 
-As you can see there are slight performance improvements compared to `RustCrypto` and *ring*.
-I also compared against `orion` to see if my implementaiton had improved, even though it doesn't support `no_std`.
+As you can see there are slight performance improvements compared to `RustCrypto` and some more against *ring*.
+I also compared against `orion` to see if my implementation had improved, even though it doesn't support `no_std`.
 
-In regards to dependencies, I used only one crate for providing the SHA2 primitives and another crate that implemented constant-time comparisons so that I could also offer a verification method.
+In regards to dependencies, I used one 'crate' providing the SHA2 primitive and another 'crate' that implemented constant-time comparison.
 
 ### More
 
