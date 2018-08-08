@@ -88,12 +88,16 @@ Remember that the first 128 bytes of the `buffer` array are the result of `K XOR
 ```
 Now we can simply hash the content of the `buffer` array to compute the MAC.
 
+#### Update [09-08-2018]
+I got a very good comment about using this approach along with a streaming API. I have updated the repository to include such an implementation and updated the benchmarks accordingly.
+
 ### Performance
 The benchmarks are listed in the [project repository](https://github.com/brycx/rigel):
 ```rust
-test RustCrypto ... bench: 2,735 ns/iter (+/- 145)
-test rigel      ... bench: 2,108 ns/iter (+/- 76)
-test ring       ... bench: 3,379 ns/iter (+/- 228)
+test RustCrypto     ... bench:       2,723 ns/iter (+/- 47)
+test rigel_one_shot ... bench:       2,094 ns/iter (+/- 182)
+test rigel_stream   ... bench:       2,174 ns/iter (+/- 121)
+test ring           ... bench:       3,378 ns/iter (+/- 79)
 ```
 > This was benchmarked on a MacBook Air 1,6 GHz Intel Core i5, 4GB.
 
