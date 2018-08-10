@@ -88,16 +88,29 @@ Remember that the first 128 bytes of the `buffer` array are the result of `K XOR
 ```
 Now we can simply hash the content of the `buffer` array to compute the MAC.
 
-#### Update [09-08-2018]
+#### Streaming API - Update [09-08-2018]
 I got a very good comment about using this approach along with a streaming API. I have updated the repository to include such an implementation and updated the benchmarks accordingly.
+
+#### Dropping another 64 bytes of allocation with no performance loss - Update [10-08-2018]
+I noticed that the extra 64 bytes of allocation for the `ires` was excessive. Previously the `ires` had been stored in the `buffer` array. Instead of this, the SHA512 hashing struct responsible for retrieving the MAC, can be updated with the `opad` and `ires` sequentially. Because of this, you only need an array of `128` bytes to store the necessary data. Before these last 64 bytes had been dropped, the benchmarks for `rigel` were:
+```rust
+test rigel_one_shot ... bench:       2,094 ns/iter (+/- 182)
+test rigel_stream   ... bench:       2,174 ns/iter (+/- 121)
+```
+Now they are:
+```rust
+test rigel_one_shot ... bench:       2,093 ns/iter (+/- 42)
+test rigel_stream   ... bench:       2,161 ns/iter (+/- 58)
+```
+The repository and performance benchmarks have been updated.  
 
 ### Performance
 The benchmarks are listed in the [project repository](https://github.com/brycx/rigel):
 ```rust
-test RustCrypto     ... bench:       2,723 ns/iter (+/- 47)
-test rigel_one_shot ... bench:       2,094 ns/iter (+/- 182)
-test rigel_stream   ... bench:       2,174 ns/iter (+/- 121)
-test ring           ... bench:       3,378 ns/iter (+/- 79)
+test RustCrypto     ... bench:       2,727 ns/iter (+/- 91)
+test rigel_one_shot ... bench:       2,093 ns/iter (+/- 42)
+test rigel_stream   ... bench:       2,161 ns/iter (+/- 58)
+test ring           ... bench:       3,357 ns/iter (+/- 96)
 ```
 > This was benchmarked on a MacBook Air 1,6 GHz Intel Core i5, 4GB.
 
