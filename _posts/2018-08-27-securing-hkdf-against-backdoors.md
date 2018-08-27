@@ -5,26 +5,26 @@ date:   2018-08-27
 ---
 
 ### About
-In the paper "Backdoored Hash Functions: Immunizing HMAC and HKDF" by Marc Fischlin, Christian Janson and Sogol Mazaheri [Ref 1], there are two proposed solutions. The first is to make HMAC resistant to a backdoored compression function of the hashing primitive, using a random cascade construction that replaces the compression function.
+In the paper "Backdoored Hash Functions: Immunizing HMAC and HKDF" by Marc Fischlin, Christian Janson and Sogol Mazaheri (Ref 1), there are two proposed solutions. The first is to make HMAC resistant to a backdoored compression function of the hashing primitive, using a random cascade construction that replaces the compression function.
 
-The second is to make HKDF backdoor-resistant using random salts in the compression function of the hashing primitive. A method first introduced by Shai Halevi and Hugo Krawczyk [Ref 2]. In this post I will focus on the implementation of making HKDF backdoor-resistant and talk about some drawbacks I think will prevent it from being adopted into existing protocols.
+The second is to make HKDF backdoor-resistant using random salts in the compression function of the hashing primitive. A method first introduced by Shai Halevi and Hugo Krawczyk (Ref 2). In this post I will focus on the implementation of making HKDF backdoor-resistant and talk about some drawbacks I think will prevent it from being adopted into existing protocols.
 
 I won't be going into details about the specific definitions, proofs, etc. These are all available in the papers listed in the "References" section. "Backdoored Hash Functions: Immunizing HMAC and HKDF" also discusses the likelihood of- and how to plant backdoors in collision-resistant hash functions.
 
 On the definition of a backdoor:
 > "_A backdoored hash function is a function which is designed by an adversary together with a short backdoor
-key, whose knowledge allows for violating the security of the hash function._" [Ref 1: p. 3].
+key, whose knowledge allows for violating the security of the hash function._" (Ref 1: p. 3).
 
 ### The proposed solution
 
-> "_Immunizing HKDF boils down to hardening HMAC and therefore the round function h._" [Ref 1: p. 12]
+> "_Immunizing HKDF boils down to hardening HMAC and therefore the round function h._" (Ref 1: p. 12)
 
-The proposed solution is to change out the compression function `h(x,y)` of the hashing primitive, to one that takes `h(x, y ^ salt)` [Ref 1: p. 13], where `^` denotes the exclusive-OR(XOR) operation. Simply put: to XOR a random salt with each input passed to the compression function.
+The proposed solution is to change out the compression function `h(x,y)` of the hashing primitive, to one that takes `h(x, y ^ salt)` (Ref 1: p. 13), where `^` denotes the exclusive-OR(XOR) operation. Simply put: to XOR a random salt with each input passed to the compression function.
 
 According to the paper:
-> "This alleviates the necessary assumption for the compression function h from collision resistance to some kind of second-preimage resistance." [Ref 1: p. 12].
+> "This alleviates the necessary assumption for the compression function h from collision resistance to some kind of second-preimage resistance." (Ref 1: p. 12).
 
-This proposed solution does not make HMAC or the hashing function itself backdoor-resistant. This **only applies to HMAC when it is being used as a key derivation function** [Ref 1: p. 13].
+This proposed solution does not make HMAC or the hashing function itself backdoor-resistant. This **only applies to HMAC when it is being used as a key derivation function** (Ref 1: p. 13).
 
 The following should be noted:
   - The salt has to be a random.
@@ -78,5 +78,5 @@ If you have found a mistake or think I'm doing something horribly wrong, please 
 
 
 ### References
-- [Ref 1]: "Backdoored Hash Functions: Immunizing HMAC and HKDF",  Marc Fischlin and Christian Janson and Sogol Mazaheri, [online](https://eprint.iacr.org/2018/362.pdf), [Accessed] 26th August, 2018.
-- [Ref 2]: "Strengthening Digital Signatures via Randomized Hashing", Shai Halevi and Hugo Krawczyk, [online](https://www.iacr.org/archive/crypto2006/41170039/41170039.pdf), [Accessed] 26th August 2018.
+- Ref 1: "Backdoored Hash Functions: Immunizing HMAC and HKDF",  Marc Fischlin and Christian Janson and Sogol Mazaheri, [online](https://eprint.iacr.org/2018/362.pdf), [Accessed] 26th August, 2018.
+- Ref 2: "Strengthening Digital Signatures via Randomized Hashing", Shai Halevi and Hugo Krawczyk, [online](https://www.iacr.org/archive/crypto2006/41170039/41170039.pdf), [Accessed] 26th August 2018.
