@@ -9,7 +9,7 @@ In the paper "Backdoored Hash Functions: Immunizing HMAC and HKDF" by Marc Fisch
 
 The second is to make HKDF backdoor-resistant using random salts in the compression function of the hashing primitive. A method first introduced by Shai Halevi and Hugo Krawczyk [Ref 2]. In this post I will focus on the implementation of making HKDF backdoor-resistant and talk about some drawbacks I think will prevent it from being adopted into existing protocols.
 
-I won't be going into details about the specific security properties, proofs, etc. These are all available in the papers listed in the "References" section. "Backdoored Hash Functions: Immunizing HMAC and HKDF" also discusses the likelihood of- and how to plant backdoors in collision-resistant hash functions.
+I won't be going into details about the specific definitions, proofs, etc. These are all available in the papers listed in the "References" section. "Backdoored Hash Functions: Immunizing HMAC and HKDF" also discusses the likelihood of- and how to plant backdoors in collision-resistant hash functions.
 
 On the definition of a backdoor:
 > "_A backdoored hash function is a function which is designed by an adversary together with a short backdoor
