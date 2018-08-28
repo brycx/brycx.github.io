@@ -45,7 +45,6 @@ pub fn compress512_with_salt(state: &mut [u64; 8], block: &Block, salt: &[u8]) {
     for (idx, itm) in salted_block.iter_mut().enumerate() {
         *itm = salt[idx] ^ block[idx];
     }
-
     read_u64v_be(&mut block_u64[..], &salted_block);
     sha512_digest_block_u64(state, &block_u64);
 }
