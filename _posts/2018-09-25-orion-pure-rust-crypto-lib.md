@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "orion - yet another attempt at pure-Rust cryptography"
+title:  "'orion' - yet another attempt at pure-Rust cryptography"
 date:   2018-09-25
 ---
 
@@ -37,9 +37,9 @@ and I have tried to make this as clear as possible in the [README of the reposit
 The project is [hosted on GitHub](https://github.com/brycx) and the
 crate is [published on crates.io](https://crates.io/crates/orion).
 
-### Roadmap
+### Road map
 
-One of the things on the roadmap for `orion` includes adding the Poly1305 algorithm,
+One of the things on the road map for `orion` includes adding the Poly1305 algorithm,
 which will also be used in the high-level API to provide an AEAD construct (IETF ChaCha20_Poly1305)
 for encrypting/decrypting data and by that also increasing usability greatly.
 
