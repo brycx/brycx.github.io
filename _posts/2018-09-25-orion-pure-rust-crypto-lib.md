@@ -12,7 +12,7 @@ is usability. This is in part achieved by providing a [thorough documentation](h
 are also provided, which are an attempt at guiding the users towards safe usage
 of the lower-level functionality of the library.
 
-`orion` forbids the use of so-called "unsafe" code, meaning that all
+`orion` itself forbids the use of so-called "unsafe" code, meaning that all
 memory-safety guarantees provided by Rust are enforced at compile-time
 (see [rust-lang docs](https://doc.rust-lang.org/book/second-edition/ch19-01-unsafe-rust.html)).
 Using no unsafe code also has its drawbacks, such as if you need near-complete
@@ -53,7 +53,7 @@ in time. A release date for a stable version has not been set.
 - `orion`'s lower-level functionality is available for use on embedded devices.
 More specifically, the high-level API is not supported in a `no_std` context.
 - Hopefully, `orion` is easy to use.
-- Ensures Rust's memory-safety guarantees by forbidding unsafe code.
+- Ensures Rust's memory-safety guarantees by forbidding unsafe code. (NOTE: See the update, this does not apply to the dependencies `orion` relies on).
 - Sometimes, easier dependency management compared to approaches like RustCrypto.
 - Actively maintained compared to [rust-crypto](https://github.com/DaGenix/rust-crypto).
 
@@ -68,9 +68,17 @@ changed so much since then, it effectively renders the audit useless).
 - `orion` is not decoupled like `RustCrypto`. This means you have the complete
 library as dependency, even if you only want to use some of its functionality.
 - Due to forbidding unsafe code and therefor also assembly,
-"constant-time" code cannot at all be guaranteed to be constant-time.
+"constant-time" code cannot at all be guaranteed to be constant-time. (NOTE: See the update, this will apply when `orion` itself tries to implement these. Currently all
+  constant-time operations are provided by external libraries that are using unsafe code)
 - `orion` is not as "mature" as other alternatives available.
 
 ### Contributing
 Contributions of any kind are most welcome! You can report issues and
 suggest new features or improvements through the [public repository](https://github.com/brycx/orion).
+
+**Update [26-09-2018]**: It has been pointed out to me that some clarifications are needed.
+`orion` _itself_ does not allow unsafe code. However, some dependencies that `orion`
+relies on do allow and use unsafe Rust code. So for example constant-time comparison is
+provided by the [subtle crate](https://crates.io/crates/subtle). The problems with
+achieving constant-time operations, when using no unsafe code, come as soon as `orion`
+tries to implement these itself.
