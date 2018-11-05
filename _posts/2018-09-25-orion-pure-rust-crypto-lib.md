@@ -7,8 +7,8 @@ date:   2018-09-25
 ### What is it?
 
 `orion` is another attempt at cryptography implemented in pure Rust. Its main focus
-is usability. This is in part achieved by providing a [thorough documentation](https://docs.rs/orion/0.7.1/orion/) of the library.
-[High-level](https://docs.rs/orion/0.7.1/orion/default/index.html) abstractions
+is usability. This is in part achieved by providing a [thorough documentation](https://docs.rs/orion) of the library.
+[High-level](https://docs.rs/orion/0.9.0/orion/default/index.html) abstractions
 are also provided, which are an attempt at guiding the users towards safe usage
 of the lower-level functionality of the library.
 
