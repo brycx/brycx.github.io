@@ -56,7 +56,7 @@ in time. A release date for a stable version has not been set.
 - `orion`'s lower-level functionality is available for use on embedded devices.
 More specifically, the high-level API is not supported in a `no_std` context.
 - Hopefully, `orion` is easy to use.
-- Ensures Rust's memory-safety guarantees by forbidding unsafe code. This does however not apply for `orion`s dependencies.
+- Ensures Rust's memory-safety guarantees by forbidding unsafe code. This does however not apply to `orion`s dependencies.
 - Sometimes, easier dependency management compared to approaches like RustCrypto.
 - Actively maintained compared to [rust-crypto](https://github.com/DaGenix/rust-crypto).
 - Because `orion` is still new and under development, it is more flexible in terms of potential contributors having a greater influence on where the project should be heading.
