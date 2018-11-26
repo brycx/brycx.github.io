@@ -8,9 +8,9 @@ date:   2018-09-25
 
 `orion` is another attempt at cryptography implemented in pure Rust. Its main focus
 is usability. This is in part achieved by providing a [thorough documentation](https://docs.rs/orion) of the library.
-[High-level](https://docs.rs/orion/0.9.0/orion/default/index.html) abstractions
-are also provided, which are an attempt at guiding the users towards safe usage
-of the lower-level functionality of the library.
+High-level abstractions are also provided, which are an attempt at guiding the users towards safe usage
+of the lower-level functionality of the library. Additionally, types used throughout the library, especially in the high-level interfaces,
+are designed to increase misuse-resistance.
 
 `orion` itself forbids the use of so-called "unsafe" code, meaning that all
 memory-safety guarantees provided by Rust are enforced at compile-time
@@ -18,6 +18,10 @@ memory-safety guarantees provided by Rust are enforced at compile-time
 Using no unsafe code also has its drawbacks, such as if you need near-complete
 constant-time execution. This will in most cases require the use of assembly
 and therefor unsafe Rust code too.
+
+Even though `orion` forbids unsafe code, some of its dependencies do not.
+For example the [subtle crate](https://crates.io/crates/subtle) provides
+constant-time comparisons, for which it uses inline assembly.
 
 ### Who is it for?
 
@@ -31,17 +35,16 @@ If you're a developer (regardless of prior experience) and looking to work on cr
 want to work on something in Rust, `orion` could very well be for you. See the note at the bottom about contributing.
 
 I would NOT recommend `orion` to someone looking for a production-ready library
-and I have tried to make this as clear as possible in the [README of the repository](https://github.com/brycx/orion#warning).
+and I have tried to make this as clear as possible in the [README of the repository](https://github.com/brycx/orion#security).
 
 ### Where is it?
 The project is [hosted on GitHub](https://github.com/brycx) and the
 crate is [published on crates.io](https://crates.io/crates/orion).
 
-### Road map
+More detailed information about the library is available in the [project wiki](https://github.com/brycx/orion/wiki).
 
-One of the things on the road map for `orion` includes adding the Poly1305 algorithm,
-which will also be used in the high-level API to provide an AEAD construct (IETF ChaCha20_Poly1305)
-for encrypting/decrypting data and by that also increasing usability greatly.
+### Road map
+`orion` is still under development, and as such the API is still changing. To get `orion` to a more "mature" state, it also needs to be used more by other projects.
 
 Before a stable version  of `orion` is released, an audit will be done.
 This audit may not cover all of `orion`, depending on my financial situation.
@@ -56,6 +59,7 @@ More specifically, the high-level API is not supported in a `no_std` context.
 - Ensures Rust's memory-safety guarantees by forbidding unsafe code. (NOTE: See the update, this does not apply to the dependencies `orion` relies on).
 - Sometimes, easier dependency management compared to approaches like RustCrypto.
 - Actively maintained compared to [rust-crypto](https://github.com/DaGenix/rust-crypto).
+- Because `orion` is still new and under development, it is more flexible in terms of potential contributors having a greater influence on where the project should be heading.
 
 ### Cons:
 - `orion` has been developed by someone who has no professional background in
@@ -68,17 +72,10 @@ changed so much since then, it effectively renders the audit useless).
 - `orion` is not decoupled like `RustCrypto`. This means you have the complete
 library as dependency, even if you only want to use some of its functionality.
 - Due to forbidding unsafe code and therefor also assembly,
-"constant-time" code cannot at all be guaranteed to be constant-time. (NOTE: See the update, this will apply when `orion` itself tries to implement these. Currently all
-  constant-time operations are provided by external libraries that are using unsafe code)
+"constant-time" code, that `orion` itself implements, cannot at all be guaranteed to be constant-time. However, currently all
+  constant-time operations are provided by external libraries that are using inline assembly for this.
 - `orion` is not as "mature" as other alternatives available.
 
 ### Contributing
 Contributions of any kind are most welcome! You can report issues and
 suggest new features or improvements through the [public repository](https://github.com/brycx/orion).
-
-**Update [26-09-2018]**: It has been pointed out to me that some clarifications are needed.
-`orion` _itself_ does not allow unsafe code. However, some dependencies that `orion`
-relies on do allow and use unsafe Rust code. So for example constant-time comparison is
-provided by the [subtle crate](https://crates.io/crates/subtle). The problems with
-achieving constant-time operations, when using no unsafe code, come as soon as `orion`
-tries to implement these itself.
