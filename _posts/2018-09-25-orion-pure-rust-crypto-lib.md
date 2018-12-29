@@ -7,8 +7,8 @@ date:   2018-09-25
 ### What is it?
 
 `orion` is another attempt at cryptography implemented in pure Rust. Its main focus
-is usability. This is in part achieved by providing a [thorough documentation](https://docs.rs/orion) of the library.
-High-level abstractions are also provided, which are an attempt at guiding the users towards safe usage
+is usability. This is in part achieved by providing [thorough documentation](https://docs.rs/orion) of the library.
+High-level abstractions are also provided, which are an attempt at guiding users towards safe usage
 of the lower-level functionality of the library. Additionally, types used throughout the library, especially in the high-level interfaces,
 are designed to increase misuse-resistance.
 
@@ -17,10 +17,10 @@ memory-safety guarantees provided by Rust are enforced at compile-time
 (see [rust-lang docs](https://doc.rust-lang.org/book/second-edition/ch19-01-unsafe-rust.html)).
 Using no unsafe code also has its drawbacks, such as if you need near-complete
 constant-time execution. This will in most cases require the use of assembly
-and therefor unsafe Rust code too.
+and therefore unsafe Rust code too.
 
 Even though `orion` forbids unsafe code, some of its dependencies do not.
-For example the [subtle crate](https://crates.io/crates/subtle) provides
+For example, the [subtle crate](https://crates.io/crates/subtle) provides
 constant-time comparisons, for which it uses inline assembly.
 
 ### Who is it for?
@@ -43,10 +43,10 @@ crate is [published on crates.io](https://crates.io/crates/orion).
 
 More detailed information about the library is available in the [project wiki](https://github.com/brycx/orion/wiki).
 
-### Road map
+### Roadmap
 `orion` is still under development, and as such the API is still changing. To get `orion` to a more "mature" state, it also needs to be used more by other projects.
 
-Before a stable version  of `orion` is released, an audit will be done.
+Before a stable version of `orion` is released, an audit will be done.
 This audit may not cover all of `orion`, depending on my financial situation.
 If it does not, the scope of the audit will be determined at the given point
 in time. A release date for a stable version has not been set.
@@ -70,7 +70,7 @@ cryptographic algorithms when he started working on `orion`.
 changed so much since then, it effectively renders the audit useless).
 - `orion` still lacks implementations of many popular/common cryptographic algorithms.
 - `orion` is not decoupled like `RustCrypto`. This means you have the complete
-library as dependency, even if you only want to use some of its functionality.
+library as a dependency, even if you only want to use some of its functionality.
 - Due to forbidding unsafe code and therefor also assembly,
 "constant-time" code, that `orion` itself implements, cannot at all be guaranteed to be constant-time. However, currently all
   constant-time operations are provided by external libraries that are using inline assembly for this.

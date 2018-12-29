@@ -92,7 +92,7 @@ Now we can simply hash the content of the `buffer` array to compute the MAC.
 I got a very good comment about using this approach along with a streaming API. I have updated the repository to include such an implementation and updated the benchmarks accordingly.
 
 #### Dropping another 64 bytes of allocation with no performance loss - Update [10-08-2018]
-I noticed that the extra 64 bytes of allocation for the `ires` was excessive. Previously the `ires` had been stored in the `buffer` array. Instead of this, the SHA512 hashing struct responsible for retrieving the MAC, can be updated with the `opad` and `ires` sequentially. Because of this, you only need an array of `128` bytes to store the necessary data. Before these last 64 bytes had been dropped, the benchmarks for `rigel` were:
+I noticed that the extra 64 bytes of allocation for the `ires` was excessive. Previously the `ires` had been stored in the `buffer` array. Instead of this, the SHA512 hashing struct responsible for retrieving the MAC can be updated with the `opad` and `ires` sequentially. Because of this, you only need an array of `128` bytes to store the necessary data. Before these last 64 bytes had been dropped, the benchmarks for `rigel` were:
 ```rust
 test rigel_one_shot ... bench:       2,094 ns/iter (+/- 182)
 test rigel_stream   ... bench:       2,174 ns/iter (+/- 121)
