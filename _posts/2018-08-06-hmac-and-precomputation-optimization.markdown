@@ -104,8 +104,15 @@ test rigel_stream   ... bench:       2,161 ns/iter (+/- 58)
 ```
 The repository and performance benchmarks have been updated.  
 
-### Performance
-The benchmarks are listed in the [project repository](https://github.com/brycx/rigel):
+### Performance - Update [31-01-2019]
+Some time has passed since this blogpost was written. Since then, I've [integrated](https://github.com/RustCrypto/MACs/commit/6ad7bb09b221a093260352e5b6f6f95b179e9b1a) some of the key setup ideas into RustCrypto, which made it into the `0.6.3` release of the [hmac crate](https://crates.io/crates/hmac).
+
+[*ring*](https://github.com/briansmith/ring) has also [updated](https://github.com/briansmith/ring/commit/a051eb6e3283cd941d48ae5358ac4d8fd35d3e89) its HMAC key setup process based on some of the ideas from this [blogpost](https://github.com/brycx/rigel/pull/27). These changes made it into the `0.14.4` release of *ring*.
+
+My other project [orion](https://github.com/brycx/orion) has also grown quite a bit, so that is also included in the new benchmarks for comparison.
+
+The old benchmarks (from 09-08-2018) were as follows:
+
 ```rust
 test RustCrypto     ... bench:       2,727 ns/iter (+/- 91)
 test rigel_one_shot ... bench:       2,093 ns/iter (+/- 42)
@@ -114,9 +121,21 @@ test ring           ... bench:       3,357 ns/iter (+/- 96)
 ```
 > This was benchmarked on a MacBook Air 1,6 GHz Intel Core i5, 4GB.
 
-As you can see there are slight performance improvements compared to `RustCrypto` and some more against *ring*.
+The new benchmarks (from 31-01-2019) are as follows:
+```rust
+test RustCrypto     ... bench:       2,168 ns/iter (+/- 141)
+test orion          ... bench:       2,207 ns/iter (+/- 52)
+test rigel_one_shot ... bench:       2,077 ns/iter (+/- 53)
+test rigel_stream   ... bench:       2,127 ns/iter (+/- 36)
+test ring           ... bench:       1,463 ns/iter (+/- 37)
+```
+> This was benchmarked on a MacBook Air 1,6 GHz Intel Core i5, 4GB.
 
-In regards to dependencies, I used one 'crate' providing the SHA2 primitive and another 'crate' that implemented constant-time comparison.
+*ring* seems to have gained a big performance improvement with its key setup process, adopting some of the ideas in this blogpost. However, this isn't to say that adopting them has resulted in the above performance improvements alone. Much could have changed since the last benchmarks.
+
+There are some things that should be noted about these benchmarks and the current implementation of rigel. The first is, they are focused on benchmarking the key setup steps of HMAC. It does process data in the benches (once), but it doesn't cover use cases such as re-using keys for different input. RustCrypto, *ring*, and orion will outperform rigel on that matter.
+
+The second thing is, even though "embedded" has been mentioned once or twice in this post, rigel has never been tested/benchmarked on actual embedded devices. The only meaning behind me mentioning embedded was focusing on not using needless allocations and supporting `no_std`.
 
 ### More
 
