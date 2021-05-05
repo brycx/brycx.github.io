@@ -13,6 +13,7 @@ The work was unpaid, focused primarily on crypto, and done mostly whenever I fou
 
 I'd like to thank Andrew Lyon([@orthecreedence](https://github.com/orthecreedence)) for being very helpful in collaboration and answering questions.
 
+Thanks to [Ionut Mihalcea](https://github.com/ionut-arm) for providing feedback on the audit report.
 
 #### Found a mistake?
 Please [reach out](https://brycx.github.io/contact/).
