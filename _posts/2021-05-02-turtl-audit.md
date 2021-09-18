@@ -4,6 +4,8 @@ title: "An audit of the Turtl core library"
 date: 2021-05-02
 ---
 
+Link to [Turtl's announcement](https://turtlapp.com/2021/07/audit-of-turtl-core/).
+
 Lately, I've spent some parts of my evenings poking at [Turtl's](https://turtlapp.com/) [core library](https://github.com/turtl/core-rs). Turtl is a note-taking application, focused on security and listed
 as one of three recommended alternatives, on [privacytools.io](https://privacytools.io/software/notebooks/), to Evernote, Google Keep, or Microsoft OneNote.
 
