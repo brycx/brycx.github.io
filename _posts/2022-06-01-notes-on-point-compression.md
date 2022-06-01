@@ -11,7 +11,7 @@ Public keys represent a point on the curve, given a pair of ($x$,$y$) coordinate
 
 However, it's not required to store the $y$-coordinate in order the use the public key. The compressed form of a public key leaves out $y$ and adds a sign instead, indicating whether $y$ was even or odd.
 
-$y$ is _even_: `pk := 0x02 || x` 
+\(y\) is _even_: `pk := 0x02 || x` 
 
 $y$ is _odd_: `pk := 0x03 || x`
 
