@@ -3,15 +3,27 @@ layout: post
 title: "Notes on point compression with P384/secp384r1"
 date: 2022-06-01
 ---
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script>
 
-Public keys represent a point on the curve, given a pair of ($x$,$y$) coordinates. In uncompressed form, a public key when encoded as bytes ([1], sec 2.3.4) it would be with the identifier $4$ prepended to both coordinates: `pk := 0x04 || x || y`.
+
+Public keys represent a point on the curve, given a pair of ($x$,$y$) coordinates. In uncompressed form, a public key when encoded as bytes ([1], sec 2.3.4) it would be with the identifier `0x04` prepended to both coordinates: `pk := 0x04 || x || y`.
 
 However, it's not required to store the $y$-coordinate in order the use the public key. The compressed form of a public key leaves out $y$ and adds a sign instead, indicating whether $y$ was even or odd.
 
-\(y\) is _even_: `pk := 0x02 || x` 
+$y$ is _even_: `pk := 0x02 || x` 
 
 $y$ is _odd_: `pk := 0x03 || x`
 
@@ -56,7 +68,7 @@ In implementations, you can expect to find values like $\frac{p+1}{4}$ and $\fra
 
 #### References
 
-- \[1\]: https://www.secg.org/sec1-v2.pdf
-- \[2\]: https://en.wikipedia.org/wiki/Tonelli%E2%80%93Shanks_algorithm
-- \[3\]: https://en.wikipedia.org/wiki/Euler%27s_criterion
-- \[4\]: https://en.wikipedia.org/wiki/Legendre_symbol
+- \[1\]: [https://www.secg.org/sec1-v2.pdf](https://www.secg.org/sec1-v2.pdf)
+- \[2\]: [https://en.wikipedia.org/wiki/Tonelli%E2%80%93Shanks_algorithm](https://en.wikipedia.org/wiki/Tonelli%E2%80%93Shanks_algorithm)
+- \[3\]: [https://en.wikipedia.org/wiki/Euler%27s_criterion](https://en.wikipedia.org/wiki/Euler%27s_criterion)
+- \[4\]: [https://en.wikipedia.org/wiki/Legendre_symbol](https://en.wikipedia.org/wiki/Legendre_symbol)
