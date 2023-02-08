@@ -12,7 +12,9 @@ An implementation of UtC+HtE and CTX for ChaCha20-Poly1305 with BLAKE2b is avail
 ### Key-committing or fully committing?
 The first question you need to figure out is whether you only want a key-committing AE or fully committing one.
 
-If an AEAD is key-committing, it means that it commits to the input `(K, N, C)`. That is the key, nonce, and ciphertext. A fully committing AE will commit to the entire input, meaning the AD as well: `(K, N, AD, C)`.
+If an AEAD is key-committing, it means that it commits to the input `K`, such that a ciphertext and its authentication tag decrypt under the key `K` only.
+
+A fully committing AE will commit to the entire input: `(K, N, AD, M)`.
 
 If you deal with protocols where you need message franking, you would for example require a fully-committing AEAD.
 
@@ -84,3 +86,7 @@ CTX takes the authentication tag produced by the MAC, eg. Poly1305, and replaces
 - The security of the commitment schemes reduces to the collision resistance of the PRFs used. Thus, choosing a large enough output size for the PRF is important. Chan and Rogaway suggest 160-bit, but the reason for this is unclear.
 
 - It is a lot easier to simply provide a fully-committing AEAD instead of deciding whether you need that or only key commitment. Especially when designing an API for a cryptographic library, I believe it is better not to leave this decision to the user and simply force the use of a fully committing scheme.
+
+### Errata
+
+- Correction to what key commitment implies (previously said to commit to the nonce which was incorrect). Thanks to Neil Madden for pointing this out. 
