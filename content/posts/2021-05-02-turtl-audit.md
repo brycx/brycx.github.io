@@ -2,6 +2,7 @@
 layout: post
 title: "An audit of the Turtl core library"
 date: 2021-05-02
+url: 2021/05/02/turtl-audit.html
 ---
 
 Link to [Turtl's announcement](https://turtlapp.com/2021/07/audit-of-turtl-core/).

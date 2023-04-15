@@ -2,6 +2,7 @@
 layout: post
 title:  "Securing HKDF - backdoor resistance using salts"
 date:   2018-08-27
+url: 2018/08/27/securing-hkdf-against-backdoors.html
 ---
 
 ### About

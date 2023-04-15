@@ -2,6 +2,7 @@
 layout: post
 title: "Notes on point compression with P384/secp384r1"
 date: 2022-06-01
+url: 2022/06/01/notes-on-point-compression.html
 ---
 
 Public keys represent a point on the curve, given a pair of ($x$,$y$) coordinates. In uncompressed form, a public key when encoded as bytes ([1], sec 2.3.4) it would be with the identifier `0x04` prepended to both coordinates: `pk := 0x04 || x || y`.

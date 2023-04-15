@@ -2,6 +2,7 @@
 layout: post
 title:  "Rust, dudect and constant-time crypto in debug mode"
 date:   2019-04-21
+url: 2019/04/21/rust-dudect-constant-time-crypto.html
 ---
 ### Introduction
 

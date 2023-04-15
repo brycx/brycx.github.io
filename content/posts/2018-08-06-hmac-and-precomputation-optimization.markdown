@@ -2,6 +2,7 @@
 layout: post
 title:  "HMAC optimization - slight performance improvements through precomputation"
 date:   2018-08-06
+url: 2018/08/06/hmac-and-precomputation-optimization.html
 ---
 
 ### Background

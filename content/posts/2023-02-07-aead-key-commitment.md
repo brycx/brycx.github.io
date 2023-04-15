@@ -2,6 +2,7 @@
 layout: post
 title: "How do I add key commitment to my AEAD scheme in 2023?"
 date: 2023-02-07
+url: 2023/02/07/aead-key-commitment.html
 ---
 
 While working on my master's thesis, I investigated some recently proposed constructions that turn AEADs into key-committing or fully-committing ones. Key commitment has recently gotten a lot more attention and I, therefore, expect this post to be outdated quite soon, as new research emerges. This post serves as a quick collection of personal notes and pointers, that maybe could help someone looking to add key commitment to their AEAD schemes today. There exist constructions proposed in earlier work, but the ones covered herein are the ones I focused on primarily.

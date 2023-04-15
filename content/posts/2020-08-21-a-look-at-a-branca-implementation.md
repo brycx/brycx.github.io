@@ -2,6 +2,7 @@
 layout: post
 title: "Rolling your own crypto gone wrong: A look at a .NET Branca implementation"
 date: 2020-08-22
+url: /2020/08/22/a-look-at-a-branca-implementation.html
 ---
 
 ### Introduction

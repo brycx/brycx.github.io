@@ -2,6 +2,7 @@
 layout: post
 title:  "'orion' - yet another attempt at pure-Rust cryptography"
 date:   2018-09-25
+url: 2018/09/25/orion-pure-rust-crypto-lib.html
 ---
 
 ### What is it?
