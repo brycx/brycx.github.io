@@ -25,7 +25,5 @@ params:
           url: 'https://github.com/brycx'
         - name: mastodon
           url: 'https://infosec.exchange/@hybridkey'
-        - name: twitter
-          url: 'https://twitter.com/hybridkey'
 
     
