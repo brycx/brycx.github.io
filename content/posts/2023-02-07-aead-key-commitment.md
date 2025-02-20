@@ -66,7 +66,7 @@ CTX is described in the 2022 paper ["On Committing Authenticated Encryption"](ht
 ```
 C, T ← nAEAD(K, N, A, M)
 T* ← H(K, N, A, T)
-C || T* 
+C || T*
 ```
 
 CTX takes the authentication tag produced by the MAC, eg. Poly1305, and replaces it with an alternative tag produced by a collision-resistant hash function. This alternative tag replaces the original tag entirely.
@@ -90,4 +90,4 @@ CTX takes the authentication tag produced by the MAC, eg. Poly1305, and replaces
 
 ### Errata
 
-- Correction to what key commitment implies (previously said to commit to the nonce which was incorrect). Thanks to Neil Madden for pointing this out. 
+- Correction to what key commitment implies (previously said to commit to the nonce which was incorrect). Thanks to Neil Madden for pointing this out.
