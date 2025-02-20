@@ -19,7 +19,6 @@ params:
   ShowReadingTime: true
   ShowCodeCopyButtons: true
 
-  social: true
   socialIcons:
     - name: github
       url: "https://github.com/brycx"
