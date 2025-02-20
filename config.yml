@@ -1,29 +1,27 @@
-baseURL: 'https://hybridkey.me/'
-languageCode: 'en-us'
-title: 'hybridkey.me'
-theme: 'PaperMod'
+baseURL: "https://hybridkey.me/"
+languageCode: "en-us"
+title: "hybridkey.me"
+theme: "PaperMod"
 
 enableEmoji: true
 enableRobotsTXT: true
 
 params:
-    env: production
+  env: production
 
-    homeInfoParams:
-        Title: '👋'
-        Content: "I'm Johannes. I work as an application security developer and I'm interested in a broad range of security/privacy topics, including cryptography, fuzzing and many things in between."
-    
-    # Setup from: https://kiwamizamurai.github.io/posts/2022-03-06/ 
-    math: true
+  homeInfoParams:
+    Title: "👋"
+    Content: "I'm Johannes. I work as an application security developer and I'm interested in a broad range of security/privacy topics, including cryptography, fuzzing and many things in between."
 
-    ShowReadingTime: true
-    ShowCodeCopyButtons: true
-    
-    
-    socialIcons:
-        - name: github
-          url: 'https://github.com/brycx'
-        - name: mastodon
-          url: 'https://infosec.exchange/@hybridkey'
+  # Setup from: https://kiwamizamurai.github.io/posts/2022-03-06/
+  math: true
 
-    
+  ShowReadingTime: true
+  ShowCodeCopyButtons: true
+
+  social: true
+  socialIcons:
+    - name: github
+      url: "https://github.com/brycx"
+    - name: mastodon
+      url: "https://infosec.exchange/@hybridkey"
