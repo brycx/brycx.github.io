@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Designing an ML-KEM API that doesn't upset people"
-date: 2025/02/20
+date: 2025-02-20
 url: 2025/02/20/designing-mlkem-api.html
 ---
 
